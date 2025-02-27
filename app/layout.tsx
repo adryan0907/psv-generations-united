@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: "PSV Generations",
+  title: "PSV Generations United",
   description: "Connect with fellow PSV supporters across generations",
   viewport: 'width=device-width, initial-scale=1',
   icons: {
