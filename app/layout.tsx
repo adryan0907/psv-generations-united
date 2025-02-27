@@ -1,10 +1,18 @@
-import { Metadata } from 'next'
+import type { Metadata } from "next"
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'PSV Campaign for Seniors',
-  description: 'Information about PSV tailored for seniors aged 65 and above',
+  title: "PSV Generations",
+  description: "Connect with fellow PSV supporters across generations",
   viewport: 'width=device-width, initial-scale=1',
+  icons: {
+    icon: [
+      {
+        url: "/idfewo20xH_1740486009112.png",
+        href: "/idfewo20xH_1740486009112.png",
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -21,6 +29,7 @@ export default function RootLayout({
             font-size: 18px;
           }
         `}</style>
+        <link rel="icon" href="/idfewo20xH_1740486009112.png" />
       </head>
       <body>
         <main>{children}</main>
