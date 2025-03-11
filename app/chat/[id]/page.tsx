@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, MoreVertical, Send } from "lucide-react"
-import { useState, useEffect, FormEvent } from "react"
+import { useState, useEffect } from "react"
 
 // Sample messages data
 const initialMessages = [
@@ -37,26 +37,28 @@ export default function ChatRoom() {
     setMounted(true)
   }, [])
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
+  const handleSendMessage = () => {
     if (!newMessage.trim()) return
 
-    const newMsg = {
-      id: messages.length + 1,
-      text: newMessage,
-      sender: "user",
-      time: new Date().toLocaleTimeString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-        hour12: false 
-      })
-    }
-
-    setMessages(prev => [...prev, newMsg])
+    setMessages([
+      ...messages,
+      {
+        id: messages.length + 1,
+        text: newMessage,
+        sender: "user",
+        time: new Date().toLocaleTimeString('en-US', { 
+          hour: '2-digit', 
+          minute: '2-digit',
+          hour12: false 
+        })
+      }
+    ])
     setNewMessage("")
   }
 
-  if (!mounted) return null
+  if (!mounted) {
+    return null // Prevents hydration errors by not rendering until client-side
+  }
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
@@ -135,46 +137,57 @@ export default function ChatRoom() {
       </div>
 
       {/* Message Input */}
-      <form onSubmit={handleSubmit} className="border-t p-4 flex items-center gap-2">
+      <div className="border-t p-4 flex items-center gap-2">
         <input
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
           placeholder="Type a message..."
           className="flex-1 p-3 rounded-full border outline-none"
         />
         <Button 
-          type="submit"
-          aria-label="Send message"
+          type="button"
+          onClick={handleSendMessage}
           className="bg-[#E31E25] hover:bg-[#cc1b21] text-white rounded-full w-12 h-12 flex items-center justify-center p-0"
         >
           <Send size={20} />
         </Button>
-      </form>
+      </div>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white py-4 px-6 flex justify-between items-center border-t">
+      <nav className="bg-white py-4 px-6 flex justify-between items-center border-t">
         <Link href="/" className="flex flex-col items-center">
           <div className="w-8 h-8 flex items-center justify-center mb-1">
-            <div className="bg-black rounded-full p-2">
-              <span className="text-white text-lg">⚡</span>
-            </div>
+            <span className="text-2xl">🏠</span>
           </div>
-          <span className="text-xs text-gray-600">Home</span>
+          <span className="text-sm">Home</span>
+        </Link>
+        <Link href="/transport" className="flex flex-col items-center">
+          <div className="w-8 h-8 flex items-center justify-center mb-1">
+            <span className="text-2xl">🚌</span>
+          </div>
+          <span className="text-sm">Transport</span>
         </Link>
         <Link href="/meetups" className="flex flex-col items-center">
           <div className="w-8 h-8 flex items-center justify-center mb-1">
             <span className="text-2xl">☕</span>
           </div>
-          <span className="text-xs text-gray-600">Meetups</span>
+          <span className="text-sm">Meetups</span>
         </Link>
-        <Link href="/chat" className="flex flex-col items-center">
+        <Link href="/tickets/book" className="flex flex-col items-center">
+          <div className="w-8 h-8 flex items-center justify-center mb-1">
+            <span className="text-2xl">🎟️</span>
+          </div>
+          <span className="text-sm">Tickets</span>
+        </Link>
+        <Link href="/chat" className="flex flex-col items-center text-[#E31E25]">
           <div className="w-8 h-8 flex items-center justify-center mb-1">
             <span className="text-2xl">💬</span>
           </div>
-          <span className="text-xs text-[#E31E25]">Chat</span>
+          <span className="text-sm">Chat</span>
         </Link>
       </nav>
     </div>
   )
-} 
+}
