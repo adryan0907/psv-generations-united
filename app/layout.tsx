@@ -1,5 +1,13 @@
 import type { Metadata } from "next"
 import './globals.css'
+import { Inter } from "next/font/google"
+
+// Load Inter font
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   title: "PSV Generations United",
@@ -21,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
         {/* Increase default font size for better readability */}
         <style>{`
@@ -31,7 +39,7 @@ export default function RootLayout({
         `}</style>
         <link rel="icon" href="/idfewo20xH_1740486009112.png" />
       </head>
-      <body>
+      <body className="font-inter">
         <main>{children}</main>
       </body>
     </html>
