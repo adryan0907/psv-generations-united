@@ -39,7 +39,13 @@ export default function Home() {
   }
 
   const handleLike = () => {
-    router.push(`/chat/${profiles[currentProfileIndex].id}`)
+    // Get current profile
+    const currentProfile = profiles[currentProfileIndex]
+    
+    // Show match animation/dialog here if needed
+    
+    // Redirect to chat with the matched user
+    router.push(`/chat/${currentProfile.id}`)
   }
 
   const currentProfile = profiles[currentProfileIndex]
