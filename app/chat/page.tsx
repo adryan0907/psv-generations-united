@@ -157,44 +157,29 @@ export default function Chat() {
             ))}
           </div>
         </div>
-
-        {/* Quick Actions */}
-        <div className="px-4">
-          <h3 className="text-sm font-bold text-gray-500 mt-6 mb-4">QUICK ACTIONS</h3>
-          <div className="grid grid-cols-2 gap-4">
-            <Link href="/meetups" className="block">
-              <div className="bg-white rounded-lg shadow-md p-5">
-                <div className="mb-2">
-                  <span className="bg-[#E31E25] text-white px-3 py-1 text-sm font-bold">MEETUPS</span>
-                </div>
-                <h3 className="font-bold text-lg">Join Meetup</h3>
-              </div>
-            </Link>
-            <Link href="/transport" className="block">
-              <div className="bg-white rounded-lg shadow-md p-5">
-                <div className="mb-2">
-                  <span className="bg-[#E31E25] text-white px-3 py-1 text-sm font-bold">TRANSPORT</span>
-                </div>
-                <h3 className="font-bold text-lg">Book Transport</h3>
-              </div>
-            </Link>
-          </div>
-        </div>
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-[999] bg-white py-4 px-6 flex justify-between items-center border-t">
-        <Link href="/" className="flex flex-col items-center text-gray-700">
-          <span className="text-2xl mb-1">🏠</span>
-          <span className="text-sm font-medium">Home</span>
+      <nav className="fixed bottom-0 left-0 right-0 bg-white py-4 px-6 flex justify-between items-center border-t">
+        <Link href="/" className="flex flex-col items-center">
+          <div className="w-8 h-8 flex items-center justify-center mb-1">
+            <div className="bg-black rounded-full p-2">
+              <span className="text-white text-lg">⚡</span>
+            </div>
+          </div>
+          <span className="text-xs text-gray-600">Home</span>
         </Link>
-        <Link href="/meetups" className="flex flex-col items-center text-gray-700">
-          <span className="text-2xl mb-1">☕</span>
-          <span className="text-sm font-medium">Meetups</span>
+        <Link href="/meetups" className="flex flex-col items-center">
+          <div className="w-8 h-8 flex items-center justify-center mb-1">
+            <span className="text-2xl">☕</span>
+          </div>
+          <span className="text-xs text-gray-600">Meetups</span>
         </Link>
-        <Link href="/chat" className="flex flex-col items-center text-[#E31E25]">
-          <span className="text-2xl mb-1">💬</span>
-          <span className="text-sm font-medium">Chat</span>
+        <Link href="/chat" className="flex flex-col items-center">
+          <div className="w-8 h-8 flex items-center justify-center mb-1">
+            <span className="text-2xl">💬</span>
+          </div>
+          <span className="text-xs text-[#E31E25]">Chat</span>
         </Link>
       </nav>
     </div>
